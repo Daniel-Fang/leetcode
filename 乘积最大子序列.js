@@ -10,12 +10,16 @@ var maxProduct = function(nums) {
     let length = nums.length;
     if(length === 0) return 0;
     if(length === 1) return nums[0];
-    let dp = []; //前n个数字乘积最大
-    dp[0] = nums[0];
-    let result = dp[0];
-    for(let i = 1; i < length; i++) {
-        dp[i] = Math.max(dp[i-1]*nums[i], nums[i]);
-        result = Math.max(result, dp[i]);
+    let result = Number.MIN_SAFE_INTEGER;
+    let imax = 1;
+    let imin = 1;
+    for(let i = 0; i < length; i++) {
+        if(nums[i] < 0) {
+            [imax, imin] = [imin, imax];
+        }
+        imax = Math.max(imax*nums[i], nums[i]);
+        imin = Math.min(imin*nums[i], nums[i]);
+        result = Math.max(imax, result);
     }
     return result;
 };
