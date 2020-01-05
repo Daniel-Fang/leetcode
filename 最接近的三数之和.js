@@ -8,5 +8,22 @@
  * @return {number}
  */
 var threeSumClosest = function(nums, target) {
-    
+    let x = 10000;
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i<nums.length-2; i++) {
+        let start = i + 1;
+        let end = nums.length - 1;
+        while (start < end) {
+            if ((nums[i] + nums[start] + nums[end] - target > 0)) {
+                x = Math.abs(nums[i] + nums[start] + nums[end] - target) < Math.abs(x - target) ? nums[i] + nums[start] + nums[end] : x;
+                end--;
+            } else if ((nums[i] + nums[start] + nums[end] - target < 0)) {
+                x = Math.abs(nums[i] + nums[start] + nums[end] - target) < Math.abs(x - target) ? nums[i] + nums[start] + nums[end] : x;
+                start++;
+            } else {
+                return target;
+            }
+        }
+    }
+    return x;
 };
