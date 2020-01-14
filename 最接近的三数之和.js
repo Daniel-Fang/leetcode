@@ -27,3 +27,6 @@ var threeSumClosest = function(nums, target) {
     }
     return x;
 };
+
+// 思路：首先对数组进行排序 TC O(nlogn) 固定一个，一个指针指向首，一个指针指向尾。
+// 判断三数之和与 target 的距离，如果更近，则给结果重新赋值。
